@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>内容后台 | 财税与AI资讯</title>
+  <link rel="stylesheet" href="/admin/static/admin.css">
+</head>
+<body>
+  <div class="auth-screen" id="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="auth-logo">CS</span>
+        <div>
+          <strong>Content Studio</strong>
+          <span>财税与AI资讯 · 本地后台</span>
+        </div>
+      </div>
+      <div id="setup-block" class="auth-block hidden">
+        <div class="auth-kicker">首次使用</div>
+        <h1>创建管理员密码</h1>
+        <p>后台只在本机运行。密码至少 8 个字符，请自行保存好。</p>
+        <form id="setup-form">
+          <label>管理员密码<input id="setup-password" type="password" autocomplete="new-password" required minlength="8"></label>
+          <label>确认密码<input id="setup-confirm" type="password" autocomplete="new-password" required minlength="8"></label>
+          <button class="btn-primary" type="submit">创建并进入后台</button>
+        </form>
+      </div>
+      <div id="login-block" class="auth-block hidden">
+        <div class="auth-kicker">欢迎回来</div>
+        <h1>登录内容后台</h1>
+        <p>输入管理员密码后编辑站长介绍和站点视觉。</p>
+        <form id="login-form">
+          <label>管理员密码<input id="login-password" type="password" autocomplete="current-password" required></label>
+          <button class="btn-primary" type="submit">登录</button>
+        </form>
+      </div>
+      <div class="auth-message" id="auth-message" role="status"></div>
+      <a class="auth-back" href="/">← 返回前台首页</a>
+    </div>
+  </div>
+
+  <div class="admin-shell hidden" id="dashboard">
+    <aside class="sidebar">
+      <div class="side-brand">
+        <span class="side-logo">CS</span>
+        <div><strong>Content Studio</strong><span>本地内容后台</span></div>
+      </div>
+      <nav class="side-nav">
+        <a class="side-link active" href="#profile">站点与介绍</a>
+        <a class="side-link" href="/tax-law.html" target="_blank">财税普法页 ↗</a>
+        <a class="side-link" href="/ai.html" target="_blank">AI 赋能页 ↗</a>
+      </nav>
+      <div class="side-note">
+        <strong>发布方式</strong>
+        <p>保存后写入 <code>content/site.json</code>，并同步到前台静态数据。</p>
+      </div>
+      <button class="logout-btn" id="logout-btn" type="button">退出登录</button>
+    </aside>
+
+    <main class="admin-main">
+      <header class="topbar">
+        <div>
+          <div class="top-kicker">PERSONAL SITE CMS</div>
+          <h1>站点与站长介绍</h1>
+          <p>在这里调整品牌、首页文案、站长介绍和主色调。</p>
+        </div>
+        <div class="top-actions">
+          <a class="btn-light" href="/" target="_blank">打开前台 ↗</a>
+          <button class="btn-primary" id="save-btn" type="button">保存并同步</button>
+        </div>
+      </header>
+
+      <div class="status-bar" id="status-bar" role="status"></div>
+
+      <div class="workspace">
+        <form class="editor" id="settings-form">
+          <section class="panel" id="profile">
+            <div class="panel-head">
+              <div><span class="panel-index">01</span><h2>品牌与首页</h2></div>
+              <p>决定访客第一眼看到的站点名称和主标题。</p>
+            </div>
+            <div class="field-grid two">
+              <label>站点名称<input id="site_name" type="text" maxlength="60"></label>
+              <label>品牌字标<input id="brand_mark" type="text" maxlength="2"></label>
+              <label>英文副标<input id="tagline" type="text" maxlength="80"></label>
+              <label>页脚文案<input id="footer_text" type="text" maxlength="100"></label>
+            </div>
+            <label>首页主标题<textarea id="hero_title" rows="3" maxlength="160"></textarea></label>
+            <label>首页说明<textarea id="hero_subtitle" rows="4" maxlength="400"></textarea></label>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div><span class="panel-index">02</span><h2>站长介绍</h2></div>
+              <p>这些内容会出现在“站长介绍”页面，也会用于首页的个人署名。</p>
+            </div>
+            <div class="field-grid two">
+              <label>显示名称<input id="name" type="text" maxlength="40"></label>
+              <label>身份/方向<input id="role" type="text" maxlength="80"></label>
+              <label>头像文字<input id="avatar" type="text" maxlength="4"></label>
+              <label>联系方式<input id="contact" type="text" maxlength="120"></label>
+            </div>
+            <label>关于页标题<input id="about_title" type="text" maxlength="80"></label>
+            <label>关于页导语<textarea id="about_lead" rows="3" maxlength="300"></textarea></label>
+            <label>个人简介<textarea id="bio" rows="5" maxlength="1200" placeholder="建议写真实背景、关注领域和工作方式。"></textarea></label>
+            <label>关注方向<textarea id="focus" rows="2" maxlength="300" placeholder="用逗号分隔，例如：财税合规，国际税务，AI 办公"></textarea></label>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div><span class="panel-index">03</span><h2>视觉倾向</h2></div>
+              <p>主色调和主题会同步影响前台按钮、标签和重点元素。</p>
+            </div>
+            <div class="theme-grid">
+              <label class="color-field">主色调
+                <span class="color-row"><input id="accent" type="color" value="#1d4ed8"><input id="accent_text" type="text" maxlength="7"></span>
+              </label>
+              <label>主题氛围
+                <select id="theme">
+                  <option value="business-blue">商务蓝 · 清晰稳健</option>
+                  <option value="midnight">深海军蓝 · 更强对比</option>
+                  <option value="slate">石板灰蓝 · 冷静克制</option>
+                </select>
+              </label>
+            </div>
+          </section>
+        </form>
+
+        <aside class="preview-panel">
+          <div class="preview-head"><span>LIVE PREVIEW</span><span class="preview-dot"></span></div>
+          <div class="preview-shell" id="preview-shell">
+            <div class="preview-top"><span class="preview-avatar" id="preview-avatar">站</span><span class="preview-brand" id="preview-site">财税与AI资讯</span></div>
+            <div class="preview-role" id="preview-role">财税与 AI 内容实践者</div>
+            <h2 id="preview-name">站长</h2>
+            <p id="preview-bio">财税与 AI 内容实践者。关注财税合规、国际税务动态，以及 AI 的实际用法。</p>
+            <div class="preview-chips" id="preview-focus"></div>
+            <div class="preview-line"></div>
+            <div class="preview-contact" id="preview-contact">正式上线后在此补充联系方式。</div>
+          </div>
+          <div class="preview-tip">保存后刷新前台即可看到更新；如果前台已打开，请重新加载页面。</div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/static/admin.js" defer></script>
+</body>
+
+</html>

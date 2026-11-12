@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="财税与AI资讯：聚合权威财税、国际税务与金融公开信息，分享财税普法和AI工具实践。">
+  <title>财税与AI资讯 | 首页</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <span class="brand-mark" data-site="brand_mark">税</span>
+        <span>
+          <span class="brand-title" data-site="site_name">财税与AI资讯</span>
+          <span class="brand-sub" data-site="tagline">Tax · Finance · AI</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html" aria-current="page">首页</a>
+        <a href="about.html">站长介绍</a>
+        <a href="tax-law.html">财税普法</a>
+        <a href="ai.html">AI 赋能</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero hero-home">
+      <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+      <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">CURATED BRIEF · TAX / FINANCE / AI</div>
+          <h1 data-site="hero_title">把财税与金融信息，整理成每天可读的简报。</h1>
+          <p data-site="hero_subtitle">聚合国家税务总局、新华财经、中国人民银行等公开来源，保留原文链接与来源名称；国际税务来源异常时如实标注，不用替代内容填充。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#latest">查看今日简报 <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="about.html">认识站长</a>
+          </div>
+          <div class="hero-meta">
+            <span><i class="meta-dot"></i>公开来源</span>
+            <span><i class="meta-dot"></i>原文可追溯</span>
+            <span><i class="meta-dot"></i>AI 辅助整理</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="今日阅读面板">
+          <div class="panel-topline"><span>BRIEFING DESK</span><span class="live-dot">LIVE</span></div>
+          <div class="panel-title">今日阅读面板</div>
+          <div class="stat-grid">
+            <div class="stat-block"><strong id="news-count">0</strong><span>当前显示资讯</span></div>
+            <div class="stat-block"><strong>03</strong><span>资讯类别</span></div>
+            <div class="stat-block"><strong>04</strong><span>内容板块</span></div>
+            <div class="stat-block"><strong>01</strong><span>每日更新</span></div>
+          </div>
+          <div class="panel-note">
+            <span class="panel-note-label">编辑原则</span>
+            <p>先保留原文，再谈解读。来源异常时公开标注，不制造“看起来完整”的假象。</p>
+          </div>
+          <a class="panel-link" href="#latest">进入新闻聚合 <span aria-hidden="true">↘</span></a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-latest" id="latest">
+      <div class="container">
+        <div class="notice reveal">
+          <span class="notice-dot" aria-hidden="true"></span>
+          <div><strong>编辑说明：</strong>新闻标题、来源与链接来自公开页面；摘要仅作来源说明，详情以原文为准。本站不编造新闻，也不把 AI 生成内容标注为官方信息。</div>
+        </div>
+
+        <div class="section-head section-head-spaced reveal">
+          <div>
+            <div class="section-kicker">DAILY SIGNALS</div>
+            <h2>最新资讯</h2>
+            <p>国内财税、国际税务与金融快报，按来源整理。</p>
+          </div>
+          <div class="section-actions">
+            <a class="btn btn-subtle" href="data/news.json" target="_blank" rel="noopener">查看数据 JSON</a>
+          </div>
+        </div>
+
+        <div class="toolbar reveal">
+          <div class="filters" role="group" aria-label="新闻分类筛选">
+            <button class="filter-btn is-active" type="button" data-filter="all">全部</button>
+            <button class="filter-btn" type="button" data-filter="domestic">国内财税</button>
+            <button class="filter-btn" type="button" data-filter="international">国际税务</button>
+            <button class="filter-btn" type="button" data-filter="finance">金融快报</button>
+          </div>
+          <div class="updated">上次更新：<strong id="last-updated">尚未更新</strong></div>
+        </div>
+
+        <div class="news-grid" id="news-grid" aria-live="polite"></div>
+        <div class="empty-state hidden" id="news-empty">
+          <h3>当前分类暂无可用新闻</h3>
+          <p>数据源异常或尚未完成首次抓取。请查看下方源状态，或运行更新脚本。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-sources" aria-labelledby="source-status-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">SOURCE HEALTH</div>
+            <h2 id="source-status-title">来源状态</h2>
+            <p>每次更新都会记录来源是否可访问。异常来源不会被其他内容替代。</p>
+          </div>
+        </div>
+        <div class="source-panel" id="source-list"></div>
+      </div>
+    </section>
+
+    <section class="section section-pillars">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">THREE WAYS IN</div>
+            <h2>从一个入口开始</h2>
+            <p>新闻、普法与工具实践分开组织，方便长期维护。</p>
+          </div>
+        </div>
+        <div class="pillar-grid">
+          <a class="pillar-card reveal" href="tax-law.html">
+            <span class="pillar-index">01</span>
+            <h3>财税普法</h3>
+            <p>法规依据、适用场景、常见问题与风险提示。先有材料，再起草。</p>
+            <span class="pillar-link">进入栏目 <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="pillar-card reveal" href="ai.html">
+            <span class="pillar-index">02</span>
+            <h3>AI 赋能</h3>
+            <p>真实使用记录、提示词模板、办公自动化与人工复核边界。</p>
+            <span class="pillar-link">进入栏目 <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="pillar-card reveal" href="about.html">
+            <span class="pillar-index">03</span>
+            <h3>站长介绍</h3>
+            <p>关于这个站、内容原则，以及站长正在关注的方向。</p>
+            <span class="pillar-link">了解本站 <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-method">
+      <div class="container method-grid reveal">
+        <div>
+          <div class="section-kicker">EDITORIAL METHOD</div>
+          <h2>慢一点，但每一步都有依据。</h2>
+        </div>
+        <div class="method-list">
+          <div><strong>01</strong><span>只抓公开页面，不碰登录或付费内容。</span></div>
+          <div><strong>02</strong><span>保留来源与链接，来源异常如实标注。</span></div>
+          <div><strong>03</strong><span>文章由素材驱动，发布前必须经过站长审核。</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>? <span data-current-year>2026</span> <span data-footer-text data-site="footer_text">财税与AI资讯 · 个人静态站点</span></p>
+      <div class="footer-links">
+        <a href="about.html">关于本站</a>
+        <a href="tax-law.html">财税普法</a>
+        <a href="ai.html">AI 赋能</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/site-data.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="data/news-data.js"></script>
+  <script src="assets/js/news.js"></script>
+</body>
+
+</html>
